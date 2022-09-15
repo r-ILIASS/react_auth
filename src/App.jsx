@@ -1,6 +1,10 @@
+import Register from "./components/Register";
+
 const App = () => {
   return (
-    <div className="bg-blue-500">App</div>
+    <main>
+      <Register />
+    </main>
   )
 }
 

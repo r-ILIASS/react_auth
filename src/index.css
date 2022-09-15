@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-slate-800 text-gray-50;
+}
+
+h1 {
+    @apply text-3xl font-bold mb-7;
+}
+
+/* -- FORM STYLES */
+.form-container {
+    @apply relative flex flex-col bg-slate-700;
+}
+
+.form-container-heading {
+    @apply px-6 pt-10;
+}
+
+.form-container-error {
+    @apply text-white font-semibold p-6 bg-red-500;
+}
+
+.form-container-success {
+    @apply absolute top-0 left-0 w-full h-full grid place-items-center bg-purple-500 font-bold text-xl;
+}
+
+form {
+    @apply px-6 pb-10 flex flex-col space-y-5 w-full min-w-[24rem] max-w-sm;
+}
+
+form > div {
+    @apply flex flex-col space-y-1;
+}
+
+form > div > label {
+    @apply text-xs font-semibold tracking-wider;
+}
+
+form > div > input {
+    @apply border border-gray-500 bg-inherit px-2 py-1 text-sm outline-none focus:ring-1 ring-blue-400;
+}
+
+form > div > p {
+    @apply text-red-400 text-xs leading-4;
+}
+
+form > button {
+    @apply border px-5 py-1 text-sm font-bold hover:bg-white/10;
+}
+
+form > span {
+    @apply text-xs font-light;
+}
+
+form > span > a {
+    @apply text-blue-400 pl-2 font-semibold cursor-pointer;
+}
