@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../api/axios";
 
 const LOGIN_URL = "/auth";
@@ -10,11 +10,15 @@ const Login = () => {
     const emailRef = useRef();
     const errRef = useRef();
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+    console.log(navigate, location);
+
     const [email, setEmail] = useState("email@email.com"); // TODO:
     const [password, setPassword] = useState("G4moto@ma"); // TODO:
 
     const [errMsg, setErrMsg] = useState("");
-    const [success, setSuccess] = useState(false);
 
     // focus email on mount
     useEffect(() => {
@@ -51,8 +55,9 @@ const Login = () => {
 
             setEmail("");
             setPassword("");
-            setSuccess(true);
-            // TODO: redirect
+            navigate(from, {
+                replace: true,
+            });
         } catch (error) {
             if (error.message === "Network Error") {
                 setErrMsg("Something went wrong, please try again later!");
@@ -71,14 +76,6 @@ const Login = () => {
 
     return (
         <section className="relative">
-            {/* success message */}
-            {success && (
-                <div className="form-container-success">
-                    <h1>You are logged in!</h1>
-                    <Link to="/">Go Home</Link>
-                </div>
-            )}
-
             {/* -- Error Message */}
             {errMsg && (
                 <p
