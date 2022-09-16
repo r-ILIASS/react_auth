@@ -13,7 +13,6 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-    console.log(navigate, location);
 
     const [email, setEmail] = useState("email@email.com"); // TODO:
     const [password, setPassword] = useState("G4moto@ma"); // TODO:

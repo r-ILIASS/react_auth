@@ -12,6 +12,13 @@ import Register from "./components/Register";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
 
+// this is not safe, for demo only, use user codes directly instead
+const ROLES = {
+    Admin: 5555,
+    Editor: 1924,
+    User: 2413,
+};
+
 const App = () => {
     return (
         <Routes>
@@ -23,10 +30,20 @@ const App = () => {
                 <Route path="unauthorized" element={<Unauthorized />} />
 
                 {/* we want to protect these routes */}
-                <Route element={<RequireAuth />}>
+                <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
                     <Route path="/" element={<Home />} />
+                </Route>
+
+                <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
                     <Route path="editor" element={<Editor />} />
+                </Route>
+
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                     <Route path="admin" element={<Admin />} />
+                </Route>
+
+                {/* prettier-ignore */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />}>
                     <Route path="lounge" element={<Lounge />} />
                 </Route>
 
