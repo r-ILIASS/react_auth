@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "../api/axios";
 
 const REGISTER_URL = "/register";
@@ -72,9 +73,6 @@ const Register = () => {
                     withCredentials: true,
                 }
             );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response));
             setSuccess(true);
             //clear state and controlled inputs
             //need value attrib on inputs for this
@@ -82,7 +80,7 @@ const Register = () => {
             setPwd("");
             setMatchPwd("");
         } catch (err) {
-            console.log("OOOO",err)
+            console.log("OOOO", err);
             if (err?.message === "Network Error") {
                 setErrMsg("No Server Response");
             } else if (err.response?.status === 409) {
@@ -98,11 +96,12 @@ const Register = () => {
     };
 
     return (
-        <section>
+        <section className="relative">
             {/* success message */}
             {success && (
                 <div className="form-container-success">
-                    Account successfully created!
+                    <h1> Account successfully created!</h1>
+                    <Link to="/login">Log In</Link>
                 </div>
             )}
 
@@ -237,7 +236,7 @@ const Register = () => {
 
                 <span>
                     Already have an account?
-                    <a href="#">Log In</a>
+                    <Link to="/login">Log In</Link>
                 </span>
             </form>
         </section>

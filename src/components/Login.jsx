@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/authProvider";
 import axios from "../api/axios";
 
@@ -74,7 +75,7 @@ const Login = () => {
             {success && (
                 <div className="form-container-success">
                     <h1>You are logged in!</h1>
-                    <a href="/">Go Home</a>
+                    <Link to="/">Go Home</Link>
                 </div>
             )}
 
@@ -130,7 +131,7 @@ const Login = () => {
 
                 <span>
                     Don't have an account?
-                    <a href="#">Register</a>
+                    <Link to="/register">Register</Link>
                 </span>
             </form>
         </section>
