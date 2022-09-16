@@ -14,6 +14,10 @@ h1 {
     @apply text-3xl font-bold mb-7;
 }
 
+h2 {
+    @apply text-xl font-bold mb-2;
+}
+
 /* -- FORM STYLES */
 .form-container {
     @apply relative flex flex-col bg-slate-700;
