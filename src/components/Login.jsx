@@ -1,6 +1,11 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
+import AuthContext from "../context/authProvider";
+import axios from "../api/axios";
+
+const LOGIN_URL = "/auth";
 
 const Login = () => {
+    const { setAuthState } = useContext(AuthContext);
     const emailRef = useRef();
     const errRef = useRef();
 
@@ -21,17 +26,56 @@ const Login = () => {
     }, [email, password]);
 
     // submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("submitted");
+        // submit to backend
+        try {
+            const response = await axios.post(
+                LOGIN_URL,
+                {
+                    email,
+                    password,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
+
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+
+            // save response to AuthContext's state
+            setAuthState({ email, roles, accessToken });
+
+            setEmail("");
+            setPassword("");
+            setSuccess(true);
+            // TODO: redirect
+        } catch (error) {
+            if (error.message === "Network Error") {
+                setErrMsg("Something went wrong, please try again later!");
+            } else if (error.response.status === 400) {
+                setErrMsg("Missing email or password");
+            } else if (error.response.status === 401) {
+                setErrMsg("Unauthorized");
+            } else {
+                setErrMsg("Login failed!");
+            }
+        }
+        setTimeout(() => {
+            errRef.current.focus();
+        }, 1000); // FIXME: find a better solution to this
     };
 
     return (
-        <section>
+        <section className="relative">
             {/* success message */}
             {success && (
-                <div className="form-container-success">You are logged in!</div>
+                <div className="form-container-success">
+                    <h1>You are logged in!</h1>
+                    <a href="/">Go Home</a>
+                </div>
             )}
 
             {/* -- Error Message */}

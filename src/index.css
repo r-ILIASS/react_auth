@@ -6,6 +6,10 @@ body {
     @apply bg-slate-800 text-gray-50;
 }
 
+main {
+    @apply min-h-screen flex items-center justify-center;
+}
+
 h1 {
     @apply text-3xl font-bold mb-7;
 }
@@ -24,7 +28,7 @@ h1 {
 }
 
 .form-container-success {
-    @apply absolute top-0 left-0 w-full h-full grid place-items-center bg-purple-500 font-bold text-xl;
+    @apply absolute top-0 left-0 w-full h-full bg-gray-900 font-bold text-xl p-10;
 }
 
 form {
