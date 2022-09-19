@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
+import useRefreshToken from "../hooks/useRefreshToken";
 
 const Employees = () => {
     const [employees, setEmployees] = useState();
+    const refresh = useRefreshToken();
 
     useEffect(() => {
         let isMounted = true;
@@ -32,6 +34,7 @@ const Employees = () => {
     return (
         <article>
             <h2>Employees List</h2>
+
             {employees?.length ? (
                 <ul>
                     {employees.map((employee, i) => (
@@ -41,6 +44,8 @@ const Employees = () => {
             ) : (
                 <p>No employees to display</p>
             )}
+
+            <button className="p-1 bg-white text-black rounded-md" onClick={() => refresh()}>Refresh</button>
         </article>
     );
 };
