@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "../api/axios";
 import useRefreshToken from "../hooks/useRefreshToken";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const Employees = () => {
     const [employees, setEmployees] = useState();
     const refresh = useRefreshToken();
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         let isMounted = true;
@@ -12,7 +13,7 @@ const Employees = () => {
 
         const getEmployees = async () => {
             try {
-                const res = await axios.get("/employees", {
+                const res = await axiosPrivate.get("/employees", {
                     signal: controller.signal,
                 });
                 console.log("employees", res.data); // TODO:
