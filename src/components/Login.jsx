@@ -14,8 +14,8 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    const [email, setEmail] = useState("email@email.com"); // TODO:
-    const [password, setPassword] = useState("G4moto@ma"); // TODO:
+    const [email, setEmail] = useState("admin@email.com"); // TODO:
+    const [password, setPassword] = useState("admin"); // TODO:
 
     const [errMsg, setErrMsg] = useState("");
 
