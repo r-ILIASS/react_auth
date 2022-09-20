@@ -68,9 +68,9 @@ const Login = () => {
                 setErrMsg("Login failed!");
             }
         }
-        setTimeout(() => {
-            errRef.current.focus();
-        }, 1000); // FIXME: find a better solution to this
+        // setTimeout(() => {
+        //     errRef.current.focus();
+        // }, 1000); // FIXME: find a better solution to this
     };
 
     return (

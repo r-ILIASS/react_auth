@@ -12,7 +12,11 @@ const useRefreshToken = () => {
         setAuthState((prev) => {
             console.log(JSON.stringify(prev));
             console.log(res.data); // TODO:
-            return { ...prev, accessToken: res.data.accessToken };
+            return {
+                ...prev,
+                accessToken: res.data.accessToken,
+                roles: res.data.roles,
+            };
         });
 
         return res.data.accessToken;
